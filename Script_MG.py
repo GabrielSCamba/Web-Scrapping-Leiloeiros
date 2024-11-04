@@ -57,13 +57,15 @@ for leiloeiro in html.find_all('p'):
         endereco_info = info.find("Prepost")
         if endereco_info != -1:
             endereco = info[endereco_info:].split('\n')[1].split('\r')[0]
-        
+    
+        sigla_extraida = None
         for sigla in lista_siglas:
-        
+            # Procurar se a sigla está presente após um espaço ou hífen
             if re.search(rf"[\s\-]{sigla}(?:[\s\-]|$)", endereco):
-                sigla,
-                None
-        estados.append(sigla)
+                sigla_extraida = sigla
+                break
+    
+        estados.append(sigla_extraida)
 
         # Extrair os telefones
         telefone_info = info.find("Telefone")
